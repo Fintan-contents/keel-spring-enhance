@@ -36,7 +36,7 @@
   </scm>
 
   <properties>
-    <io.spring.platform.version>Cairo-SR2</io.spring.platform.version>
+    <org.springframework.boot.version>3.1.5</org.springframework.boot.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>17</java.version>
@@ -53,9 +53,10 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>io.spring.platform</groupId>
-        <artifactId>platform-bom</artifactId>
-        <version>${io.spring.platform.version}</version>
+        <!-- Import dependency management from Spring Boot -->
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${org.springframework.boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
