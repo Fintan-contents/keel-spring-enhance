@@ -24,21 +24,11 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class TransactionTokenInfoTest {
-
-    @BeforeEach
-    void setUp() throws Exception {
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-    }
 
     @Test
     void TestTransactionTokenInfo01() {

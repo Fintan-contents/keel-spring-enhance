@@ -24,7 +24,7 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -41,7 +41,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.method.HandlerMethod;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -74,10 +73,6 @@ class TransactionTokenInterceptorTest {
 
         // prepare intercepter instance
         interceptor = new TransactionTokenInterceptor();
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
     }
 
     @Test
@@ -275,9 +270,7 @@ class TransactionTokenInterceptorTest {
     @Test
     void testPostHandleIncorrectHandler() throws Exception {
 
-        assertDoesNotThrow(() -> {
-            interceptor.postHandle(request, response, null, null);
-        });
+        assertDoesNotThrow(() -> interceptor.postHandle(request, response, null, null));
     }
 
     @Test

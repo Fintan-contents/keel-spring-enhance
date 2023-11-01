@@ -24,7 +24,7 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 
 import org.junit.jupiter.api.Test;
 

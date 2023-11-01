@@ -27,7 +27,7 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -36,12 +36,12 @@ import java.util.Map;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for TransactionTokenRequestDataValueProcessor
  */
-public class TransactionTokenRequestDataValueProcessorTest {
+class TransactionTokenRequestDataValueProcessorTest {
 
     /**
      * Test method for
@@ -49,7 +49,7 @@ public class TransactionTokenRequestDataValueProcessorTest {
      * request has no next token.
      */
     @Test
-    public void testGetExtraHiddenFields01() {
+    void testGetExtraHiddenFields01() {
         // setup arguments
         TransactionTokenRequestDataValueProcessor processor = new TransactionTokenRequestDataValueProcessor();
         HttpServletRequest request = mock(HttpServletRequest.class);
@@ -72,7 +72,7 @@ public class TransactionTokenRequestDataValueProcessorTest {
      * request has next token.
      */
     @Test
-    public void testGetExtraHiddenFields02() {
+    void testGetExtraHiddenFields02() {
         // setup arguments
         TransactionTokenRequestDataValueProcessor processor = new TransactionTokenRequestDataValueProcessor();
         HttpServletRequest request = mock(HttpServletRequest.class);

@@ -10,15 +10,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TransactionTokenAutoConfigurationTest {
+class TransactionTokenAutoConfigurationTest {
 
     private WebApplicationContextRunner contextRunner = new WebApplicationContextRunner()
             .withConfiguration(AutoConfigurations.of(TransactionTokenAutoConfiguration.class));
 
     @Test
-    public void contextShouldNotConfigureTransactionTokenInterceptorWhenTransactionTokenInterceptorAlreadyExists() {
+    void contextShouldNotConfigureTransactionTokenInterceptorWhenTransactionTokenInterceptorAlreadyExists() {
         contextRunner
                 .withUserConfiguration(TestConfiguration.class)
                 .run((context) -> assertThat(context)
@@ -26,7 +26,7 @@ public class TransactionTokenAutoConfigurationTest {
     }
 
     @Test
-    public void contextShouldNotConfigureTransactionTokenInterceptorWhenFilteringWebMvcConfigurer() {
+    void contextShouldNotConfigureTransactionTokenInterceptorWhenFilteringWebMvcConfigurer() {
         contextRunner
                 .withClassLoader(new FilteredClassLoader(WebMvcConfigurer.class))
                 .run((context) -> assertThat(context)
@@ -34,7 +34,7 @@ public class TransactionTokenAutoConfigurationTest {
     }
 
     @Test
-    public void contextShouldConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesIsEnabled() {
+    void contextShouldConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesIsEnabled() {
         contextRunner
                 .withPropertyValues("keel.transaction.token.enabled=true")
                 .run((context) -> assertThat(context)
@@ -42,7 +42,7 @@ public class TransactionTokenAutoConfigurationTest {
     }
 
     @Test
-    public void contextShouldNotConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesIsNotEnabled() {
+    void contextShouldNotConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesIsNotEnabled() {
         contextRunner
                 .withPropertyValues("keel.transaction.token.enabled=false")
                 .run((context) -> assertThat(context)
@@ -50,7 +50,7 @@ public class TransactionTokenAutoConfigurationTest {
     }
 
     @Test
-    public void contextShouldConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesMatchIfMissing() {
+    void contextShouldConfigureTransactionTokenInterceptorWhenTransactionTokenPropertiesMatchIfMissing() {
         contextRunner
                 .run((context) -> assertThat(context)
                         .hasSingleBean(TransactionTokenInterceptor.class));

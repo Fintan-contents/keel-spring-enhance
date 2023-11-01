@@ -24,7 +24,7 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -35,22 +35,12 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test class for TransactionTokenContextHandlerMethodArgumentResolver
  */
 class TransactionTokenContextHandlerMethodArgumentResolverTest {
-
-    @BeforeEach
-    void setUp() throws Exception {
-    }
-
-    @AfterEach
-    void tearDown() throws Exception {
-    }
 
     /**
      * case of supportsParameter returns true
@@ -95,7 +85,7 @@ class TransactionTokenContextHandlerMethodArgumentResolverTest {
         NativeWebRequest webRequest = mock(NativeWebRequest.class);
         WebDataBinderFactory binderFactory = mock(WebDataBinderFactory.class);
 
-        String str = "testResolveArgument01";
+    String str = "testResolveArgument01";
         when(webRequest.getAttribute(
                 TransactionTokenInterceptor.TOKEN_CONTEXT_REQUEST_ATTRIBUTE_NAME,
                 RequestAttributes.SCOPE_REQUEST)).thenReturn(str);
