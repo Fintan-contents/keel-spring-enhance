@@ -24,14 +24,14 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class InvalidTransactionTokenExceptionTest {
+class InvalidTransactionTokenExceptionTest {
 
     @Test
-    public void testExceptionConstructor() {
+    void testExceptionConstructor() {
 
         try {
             process();
@@ -42,7 +42,7 @@ public class InvalidTransactionTokenExceptionTest {
     }
 
     @Test
-    public void testExceptionConstructorWithCustomMessage() {
+    void testExceptionConstructorWithCustomMessage() {
 
         try {
             processOther();

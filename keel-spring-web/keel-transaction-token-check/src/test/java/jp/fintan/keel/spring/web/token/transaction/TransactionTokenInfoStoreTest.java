@@ -24,28 +24,28 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import org.springframework.ui.Model;
 import org.springframework.web.method.HandlerMethod;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TransactionTokenInfoStoreTest {
+class TransactionTokenInfoStoreTest {
 
     TransactionTokenInfoStore store;
 
-    @Before
-    public void setup() {
+    @BeforeEach
+    void setup() {
         store = new TransactionTokenInfoStore();
     }
 
     @Test
-    public void testCreateTransactionTokenInfo01() throws Exception {
+    void testCreateTransactionTokenInfo01() throws Exception {
 
         HandlerMethod handlerMethod = new HandlerMethod(new TransactionTokenSampleController(), TransactionTokenSampleController.class
                 .getDeclaredMethod("fourth", SampleForm.class, Model.class));
@@ -57,7 +57,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTransactionTokenInfo02() throws Exception {
+    void testCreateTransactionTokenInfo02() throws Exception {
 
         HandlerMethod handlerMethod = new HandlerMethod(new TransactionTokenSampleController(), TransactionTokenSampleController.class
                 .getDeclaredMethod("first", SampleForm.class, Model.class));
@@ -69,7 +69,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName01() throws Exception {
+    void testCreateTokenInfoName01() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -84,7 +84,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName02() throws Exception {
+    void testCreateTokenInfoName02() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -97,7 +97,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName03() throws Exception {
+    void testCreateTokenInfoName03() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -110,7 +110,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName04() throws Exception {
+    void testCreateTokenInfoName04() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -123,7 +123,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName05() throws Exception {
+    void testCreateTokenInfoName05() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -137,7 +137,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testCreateTokenInfoName06() throws Exception {
+    void testCreateTokenInfoName06() throws Exception {
 
         TransactionTokenCheck methodAnnotation = mock(
                 TransactionTokenCheck.class);
@@ -151,7 +151,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testGetTransactionTokenInfo() throws NoSuchMethodException, SecurityException {
+    void testGetTransactionTokenInfo() throws NoSuchMethodException, SecurityException {
 
         HandlerMethod handlerMethod = new HandlerMethod(new TransactionTokenSampleController(), TransactionTokenSampleController.class
                 .getDeclaredMethod("first", SampleForm.class, Model.class));
@@ -161,7 +161,7 @@ public class TransactionTokenInfoStoreTest {
     }
 
     @Test
-    public void testNamespaceCreateTransactionTokenInfo() throws Exception {
+    void testNamespaceCreateTransactionTokenInfo() throws Exception {
 
         HandlerMethod handlerMethod = new HandlerMethod(new TransactionTokenSampleNamespaceController(), TransactionTokenSampleNamespaceController.class
                 .getDeclaredMethod("first"));

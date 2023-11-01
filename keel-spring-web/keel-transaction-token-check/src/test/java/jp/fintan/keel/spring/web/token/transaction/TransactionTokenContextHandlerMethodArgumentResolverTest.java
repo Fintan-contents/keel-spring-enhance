@@ -24,7 +24,7 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -35,28 +35,28 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for TransactionTokenContextHandlerMethodArgumentResolver
  */
-public class TransactionTokenContextHandlerMethodArgumentResolverTest {
+class TransactionTokenContextHandlerMethodArgumentResolverTest {
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() throws Exception {
     }
 
     /**
      * case of supportsParameter returns true
      */
     @Test
-    public void testSupportsParameter01() {
+    void testSupportsParameter01() {
         TransactionTokenContextHandlerMethodArgumentResolver resolver = new TransactionTokenContextHandlerMethodArgumentResolver();
         MethodParameter parameter = mock(MethodParameter.class);
 
@@ -72,7 +72,7 @@ public class TransactionTokenContextHandlerMethodArgumentResolverTest {
      * case of supportsParameter returns false
      */
     @Test
-    public void testSupportsParameter02() {
+    void testSupportsParameter02() {
         TransactionTokenContextHandlerMethodArgumentResolver resolver = new TransactionTokenContextHandlerMethodArgumentResolver();
         MethodParameter parameter = mock(MethodParameter.class);
 
@@ -88,14 +88,14 @@ public class TransactionTokenContextHandlerMethodArgumentResolverTest {
      * case of resolveArgument
      */
     @Test
-    public void testResolveArgument01() {
+    void testResolveArgument01() {
         TransactionTokenContextHandlerMethodArgumentResolver resolver = new TransactionTokenContextHandlerMethodArgumentResolver();
         MethodParameter parameter = mock(MethodParameter.class);
         ModelAndViewContainer mavContainer = mock(ModelAndViewContainer.class);
         NativeWebRequest webRequest = mock(NativeWebRequest.class);
         WebDataBinderFactory binderFactory = mock(WebDataBinderFactory.class);
 
-        String str = new String("testResolveArgument01");
+        String str = "testResolveArgument01";
         when(webRequest.getAttribute(
                 TransactionTokenInterceptor.TOKEN_CONTEXT_REQUEST_ATTRIBUTE_NAME,
                 RequestAttributes.SCOPE_REQUEST)).thenReturn(str);

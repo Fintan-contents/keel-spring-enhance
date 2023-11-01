@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
 import java.util.Enumeration;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import jp.fintan.keel.spring.web.token.TokenStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;

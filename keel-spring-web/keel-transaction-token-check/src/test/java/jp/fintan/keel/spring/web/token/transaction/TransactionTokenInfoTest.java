@@ -24,24 +24,24 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-public class TransactionTokenInfoTest {
+class TransactionTokenInfoTest {
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
     }
 
-    @After
-    public void tearDown() throws Exception {
+    @AfterEach
+    void tearDown() throws Exception {
     }
 
     @Test
-    public void TestTransactionTokenInfo01() {
+    void TestTransactionTokenInfo01() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -57,7 +57,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedCreate01() {
+    void TestNeedCreate01() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -72,7 +72,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedCreate02() {
+    void TestNeedCreate02() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -87,7 +87,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedCreate03() {
+    void TestNeedCreate03() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -102,7 +102,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedValidate01() {
+    void TestNeedValidate01() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -117,7 +117,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedValidate02() {
+    void TestNeedValidate02() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -132,7 +132,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedValidate03() {
+    void TestNeedValidate03() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -147,7 +147,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedCreate04() {
+    void TestNeedCreate04() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -162,7 +162,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestNeedValidate04() {
+    void TestNeedValidate04() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -177,7 +177,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedCreate05() {
+    void testNeedCreate05() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -192,7 +192,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedValidate05() {
+    void testNeedValidate05() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -207,7 +207,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedKeep01() {
+    void testNeedKeep01() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -222,7 +222,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedKeep02() {
+    void testNeedKeep02() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -237,7 +237,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedKeep03() {
+    void testNeedKeep03() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -252,7 +252,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedKeep04() {
+    void testNeedKeep04() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -267,7 +267,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void testNeedKeep05() {
+    void testNeedKeep05() {
         // setup input parameters
 
         String tokenName = "aaa";
@@ -282,7 +282,7 @@ public class TransactionTokenInfoTest {
     }
 
     @Test
-    public void TestToString() {
+    void TestToString() {
         // setup input parameters
 
         String tokenName = "tokenName";
