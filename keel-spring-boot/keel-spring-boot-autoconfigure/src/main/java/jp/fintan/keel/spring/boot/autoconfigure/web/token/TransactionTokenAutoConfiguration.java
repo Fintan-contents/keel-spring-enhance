@@ -2,6 +2,7 @@ package jp.fintan.keel.spring.boot.autoconfigure.web.token;
 
 import jp.fintan.keel.spring.web.token.transaction.TransactionTokenInterceptor;
 import jp.fintan.keel.spring.web.token.transaction.TransactionTokenRequestDataValueProcessor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -9,7 +10,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplicat
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication.Type;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,7 +18,7 @@ import org.springframework.web.servlet.support.RequestDataValueProcessor;
 /**
  * トランサクショントークン機能のAuto-configuration。
  */
-@Configuration
+@AutoConfiguration
 @ConditionalOnWebApplication(type = Type.SERVLET)
 @ConditionalOnClass({WebMvcConfigurer.class})
 @ConditionalOnMissingBean(TransactionTokenInterceptor.class)
