@@ -25,7 +25,7 @@ package jp.fintan.keel.spring.web.mvc.support;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.servlet.support.RequestDataValueProcessor;
 
@@ -51,7 +51,7 @@ public class RequestDataValueProcessorAdaptor implements
      * @param action the form action
      * @param method the form HTTP method
      * @return the action to use, possibly modified
-     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processAction(javax.servlet.http.HttpServletRequest,
+     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processAction(jakarta.servlet.http.HttpServletRequest,
      *      java.lang.String, java.lang.String)
      * @since 1.0.2
      */
@@ -68,7 +68,7 @@ public class RequestDataValueProcessorAdaptor implements
      * @param value the form field value
      * @param type the form field type ("text", "hidden", etc.)
      * @return the form field value to use, possibly modified
-     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processFormFieldValue(javax.servlet.http.HttpServletRequest,
+     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processFormFieldValue(jakarta.servlet.http.HttpServletRequest,
      *      java.lang.String, java.lang.String, java.lang.String)
      */
     @Override
@@ -81,7 +81,7 @@ public class RequestDataValueProcessorAdaptor implements
      * returns null.
      * @param request the current request
      * @return additional hidden form fields to be added, or {@code null}
-     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#getExtraHiddenFields(javax.servlet.http.HttpServletRequest)
+     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#getExtraHiddenFields(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public Map<String, String> getExtraHiddenFields(
@@ -94,7 +94,7 @@ public class RequestDataValueProcessorAdaptor implements
      * @param request the current request
      * @param url the URL value
      * @return the URL to use, possibly modified
-     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processUrl(javax.servlet.http.HttpServletRequest,
+     * @see org.springframework.web.servlet.support.RequestDataValueProcessor#processUrl(jakarta.servlet.http.HttpServletRequest,
      *      java.lang.String)
      */
     @Override
