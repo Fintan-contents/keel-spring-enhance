@@ -85,7 +85,7 @@ class TransactionTokenContextHandlerMethodArgumentResolverTest {
         NativeWebRequest webRequest = mock(NativeWebRequest.class);
         WebDataBinderFactory binderFactory = mock(WebDataBinderFactory.class);
 
-    String str = "testResolveArgument01";
+        String str = "testResolveArgument01";
         when(webRequest.getAttribute(
                 TransactionTokenInterceptor.TOKEN_CONTEXT_REQUEST_ATTRIBUTE_NAME,
                 RequestAttributes.SCOPE_REQUEST)).thenReturn(str);
