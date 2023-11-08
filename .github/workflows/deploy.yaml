@@ -1,4 +1,4 @@
-name: Publish package to the Maven Central Repository
+name: Deploy packages to the Maven Central Repository
 on:
   push:
     branches:
@@ -14,7 +14,7 @@ on:
       - synchronize
       - reopened
 jobs:
-  publish:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
           gpg-passphrase: OSSRH_GPG_PASSPHRASE
           # gpg --export-secret-key --armor ... でエクスポートした秘密鍵
           gpg-private-key: ${{ secrets.OSSRH_GPG_PRIVATE_KEY }}
-      - name: Publish package
+      - name: Deploy packages
         run: ./mvnw -Possrh --batch-mode deploy
         env:
           OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}

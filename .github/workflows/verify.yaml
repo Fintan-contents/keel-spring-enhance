@@ -1,4 +1,4 @@
-name: Verify package
+name: Verify packages
 on:
   pull_request:
     branches:
@@ -9,7 +9,7 @@ on:
       - synchronize
       - reopened
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -19,5 +19,5 @@ jobs:
           java-version: 17
           distribution: liberica
           cache: maven
-      - name: Verify package
+      - name: Verify packages
         run: ./mvnw verify
