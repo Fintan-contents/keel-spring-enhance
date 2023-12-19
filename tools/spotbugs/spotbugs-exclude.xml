@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter xmlns="https://github.com/spotbugs/filter/3.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://github.com/spotbugs/filter/3.0.0 https://raw.githubusercontent.com/spotbugs/spotbugs/3.1.0/spotbugs/etc/findbugsfilter.xsd">
+
+    <!-- コンストラクタ内でSecureRandomが生成されて1度しか使われないが、TokenStringGeneratorはシングルトンスコープのコンポーネントのコンストラクタでしか使用されないので許容する -->
+    <!-- 文字集合を指定せずString#getBytesしているが、ASCII文字で構成される文字列に対する操作のため許容する -->
+    <Match>
+        <Bug pattern="DMI_RANDOM_USED_ONLY_ONCE,DM_DEFAULT_ENCODING"/>
+        <Class name="jp.fintan.keel.spring.web.token.TokenStringGenerator"/>
+    </Match>
+
+    <!-- ConcurrentHashMapをモニターにして同期しておりConcurrency Utilitiesのベストプラクティスではないが、大きな問題もないため許容する -->
+    <Match>
+        <Bug pattern="JLM_JSR166_UTILCONCURRENT_MONITORENTER"/>
+        <Class name="jp.fintan.keel.spring.web.token.transaction.TransactionTokenInfoStore"/>
+    </Match>
+
+    <!-- ミュータブルなオブジェクトを許容する -->
+    <Match>
+        <Or>
+            <Bug pattern="EI_EXPOSE_REP"/>
+            <Bug pattern="EI_EXPOSE_REP2"/>
+        </Or>
+    </Match>
+
+</FindBugsFilter>
