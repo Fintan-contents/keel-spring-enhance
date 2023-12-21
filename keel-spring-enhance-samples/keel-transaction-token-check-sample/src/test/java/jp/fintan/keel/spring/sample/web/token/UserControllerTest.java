@@ -14,22 +14,19 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(classes = TransactionTokenCheckSampleApplication.class)
 @AutoConfigureMockMvc
-public class UserControllerTest {
+class UserControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void testToConfirmIfTokensAreBeingGenerated() throws Exception {
+    void testToConfirmIfTokensAreBeingGenerated() throws Exception {
         mockMvc
                 .perform(post("/confirm")
                         .param("name", "taro")
@@ -42,7 +39,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testToConfirmErrorOccursIfNotSendingToken() throws Exception {
+    void testToConfirmErrorOccursIfNotSendingToken() throws Exception {
         mockMvc
                 .perform(post("/create")
                         .param("name", "taro")
@@ -52,7 +49,7 @@ public class UserControllerTest {
     }
 
     @Test
-    public void testToConfirmThatItNormallyIfSendingToken() throws Exception {
+    void testToConfirmThatItNormallyIfSendingToken() throws Exception {
 
         final MockHttpServletRequest request = mockMvc
                 .perform(post("/confirm")

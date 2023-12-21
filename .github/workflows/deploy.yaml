@@ -1,0 +1,29 @@
+name: Deploy packages to the Maven Central Repository
+on:
+  push:
+    branches:
+      - master
+      - develop
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Java and Maven settings
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: liberica
+          cache: maven
+          server-id: ossrh
+          server-username: OSSRH_USERNAME
+          server-password: OSSRH_PASSWORD
+          gpg-passphrase: OSSRH_GPG_PASSPHRASE
+          # gpg --export-secret-key --armor ... でエクスポートした秘密鍵
+          gpg-private-key: ${{ secrets.OSSRH_GPG_PRIVATE_KEY }}
+      - name: Deploy packages
+        run: ./mvnw -Possrh --batch-mode deploy
+        env:
+          OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+          OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+          OSSRH_GPG_PASSPHRASE: ${{ secrets.OSSRH_GPG_PASSPHRASE }}

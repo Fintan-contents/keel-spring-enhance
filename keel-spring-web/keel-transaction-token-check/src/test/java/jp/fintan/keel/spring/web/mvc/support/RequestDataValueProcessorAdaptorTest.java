@@ -23,33 +23,33 @@
  */
 package jp.fintan.keel.spring.web.mvc.support;
 
+import static org.hamcrest.MatcherAssert.*;
 import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.mock.web.MockHttpServletRequest;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class RequestDataValueProcessorAdaptorTest {
+class RequestDataValueProcessorAdaptorTest {
 
     RequestDataValueProcessorAdaptor requestDataValueProcessorAdaptor = new RequestDataValueProcessorAdaptor();
 
     HttpServletRequest request = new MockHttpServletRequest();
 
     @Test
-    public void testProcessAction01() {
+    void testProcessAction01() {
         String action = requestDataValueProcessorAdaptor.processAction(request,
                 "action");
         assertThat(action, is("action"));
     }
 
     @Test
-    public void testProcessAction02() {
+    void testProcessAction02() {
         // set up
         String action = requestDataValueProcessorAdaptor.processAction(request,
                 "action", "method");
@@ -59,21 +59,21 @@ public class RequestDataValueProcessorAdaptorTest {
     }
 
     @Test
-    public void testProcessFormFieldValue() {
+    void testProcessFormFieldValue() {
         String value = requestDataValueProcessorAdaptor.processFormFieldValue(
                 request, "", "value", "");
         assertThat(value, is("value"));
     }
 
     @Test
-    public void testGetExtraHiddenFields() {
+    void testGetExtraHiddenFields() {
         Map<String, String> map = requestDataValueProcessorAdaptor
                 .getExtraHiddenFields(request);
         assertNull(map);
     }
 
     @Test
-    public void testProcessUrl() {
+    void testProcessUrl() {
         String url = requestDataValueProcessorAdaptor.processUrl(request,
                 "http://localhost:8080/test");
         assertThat(url, is("http://localhost:8080/test"));

@@ -24,14 +24,13 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Enumeration;
 import java.util.concurrent.TimeUnit;
 
-import javax.servlet.http.HttpSession;
+import jakarta.servlet.http.HttpSession;
 
 import jp.fintan.keel.spring.web.token.TokenStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +39,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockHttpSession;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test class for HttpSessionTransactionTokenStore
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = TestConfig.class)
-public class HttpSessionTransactionTokenStoreTest {
+@SpringJUnitConfig(classes = TestConfig.class)
+class HttpSessionTransactionTokenStoreTest {
 
     MockHttpServletRequest request;
 
@@ -68,8 +64,8 @@ public class HttpSessionTransactionTokenStoreTest {
 
     HttpSessionTransactionTokenStore store;
 
-    @Before
-    public void setUp() throws Exception {
+    @BeforeEach
+    void setUp() throws Exception {
         // prepare request object
         request = new MockHttpServletRequest();
 
@@ -85,7 +81,7 @@ public class HttpSessionTransactionTokenStoreTest {
      * tokenHolder is null
      */
     @Test
-    public void testGetAndClear01() {
+    void testGetAndClear01() {
         // setup parameters
         HttpSession session = new MockHttpSession();
         request.setSession(session);
@@ -105,7 +101,7 @@ public class HttpSessionTransactionTokenStoreTest {
      * tokenHolder is not null
      */
     @Test
-    public void testGetAndClear02() {
+    void testGetAndClear02() {
         // setup parameters
         HttpSession session = new MockHttpSession();
         TransactionToken token = new TransactionToken("tokenName", "tokenKey", "tokenValue");
@@ -128,19 +124,21 @@ public class HttpSessionTransactionTokenStoreTest {
                         + token.getTokenName() + token.getTokenKey()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetAndClear_tokenIsNull() throws Exception {
-        try {
-            store = new HttpSessionTransactionTokenStore();
-            store.getAndClear(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("token must not be null"));
-            throw e;
-        }
+    @Test
+    void testGetAndClear_tokenIsNull() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                store = new HttpSessionTransactionTokenStore();
+                store.getAndClear(null);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("token must not be null"));
+                throw e;
+            }
+        });
     }
 
     @Test
-    public void testRemove() {
+    void testRemove() {
         // setup parameters
         HttpSession session = new MockHttpSession();
         request.setSession(session);
@@ -159,22 +157,24 @@ public class HttpSessionTransactionTokenStoreTest {
                         + token.getTokenName() + token.getTokenKey()));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testRemove_tokenIsNull() throws Exception {
-        try {
-            store = new HttpSessionTransactionTokenStore();
-            store.remove(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("token must not be null"));
-            throw e;
-        }
+    @Test
+    void testRemove_tokenIsNull() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                store = new HttpSessionTransactionTokenStore();
+                store.remove(null);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("token must not be null"));
+                throw e;
+            }
+        });
     }
 
     /**
      * create a new Token key (stored token is as it is the same as sizePerTokenName)
      */
     @Test
-    public void testCreateAndReserveTokenKey_storedToken_is_as_same_as_sizePerTokenName() throws InterruptedException {
+    void testCreateAndReserveTokenKey_storedToken_is_as_same_as_sizePerTokenName() throws InterruptedException {
         // prepare store instance
         store = new HttpSessionTransactionTokenStore(4, 4);
 
@@ -234,7 +234,7 @@ public class HttpSessionTransactionTokenStoreTest {
      * create a new Token key (stored token is as it is the same as sizePerTokenName)
      */
     @Test
-    public void testCreateAndReserveTokenKey_storedToken_is_greater_than_sizePerTokenName() throws InterruptedException {
+    void testCreateAndReserveTokenKey_storedToken_is_greater_than_sizePerTokenName() throws InterruptedException {
         // prepare store instance
         store = new HttpSessionTransactionTokenStore(4, 4);
 
@@ -299,7 +299,7 @@ public class HttpSessionTransactionTokenStoreTest {
      * create a new Token key (stored token is as it is the same as sizePerTokenName)
      */
     @Test
-    public void testCreateAndReserveTokenKey_storedToken_is_greater_than_sizePerTokenName2() throws InterruptedException {
+    void testCreateAndReserveTokenKey_storedToken_is_greater_than_sizePerTokenName2() throws InterruptedException {
         // prepare store instance
         store = new HttpSessionTransactionTokenStore(4, 4);
 
@@ -369,7 +369,7 @@ public class HttpSessionTransactionTokenStoreTest {
      * create a new Token key (stored token is less than sizePerTokenName)
      */
     @Test
-    public void testCreateAndReserveTokenKey_storedToken_isLessThan_sizePerTokenName() {
+    void testCreateAndReserveTokenKey_storedToken_isLessThan_sizePerTokenName() {
         // prepare store instance
         store = new HttpSessionTransactionTokenStore(5);
 
@@ -411,100 +411,118 @@ public class HttpSessionTransactionTokenStoreTest {
                 token3)), is(notNullValue()));
     }
 
-    @Test(expected = IllegalStateException.class)
-    public void testCreateAndReserveTokenKey_generate_failed() throws Exception {
-        // prepare store instance
-        store = new HttpSessionTransactionTokenStore(new TokenStringGenerator() {
-            @Override
-            public String generate(String seed) {
-                // return always same value
-                return "xxxxx";
+    @Test
+    void testCreateAndReserveTokenKey_generate_failed() throws Exception {
+        assertThrows(IllegalStateException.class, () -> {
+            // prepare store instance
+            store = new HttpSessionTransactionTokenStore(new TokenStringGenerator() {
+                @Override
+                public String generate(String seed) {
+                    // return always same value
+                    return "xxxxx";
+                }
+            }, 5, 5);
+
+            // setup parameters
+            MockHttpSession session = new MockHttpSession();
+            request.setSession(session);
+
+            session.setAttribute(
+                    HttpSessionTransactionTokenStore.TOKEN_HOLDER_SESSION_ATTRIBUTE_PREFIX
+                            + "foo" + TransactionToken.TOKEN_STRING_SEPARATOR
+                            + "xxxxx", "already in!");
+            try {
+                store.createAndReserveTokenKey("foo");
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is(
+                        "token key generation failed within retry count 5"));
+                throw e;
             }
-        }, 5, 5);
-
-        // setup parameters
-        MockHttpSession session = new MockHttpSession();
-        request.setSession(session);
-
-        session.setAttribute(
-                HttpSessionTransactionTokenStore.TOKEN_HOLDER_SESSION_ATTRIBUTE_PREFIX
-                        + "foo" + TransactionToken.TOKEN_STRING_SEPARATOR
-                        + "xxxxx", "already in!");
-        try {
-            store.createAndReserveTokenKey("foo");
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is(
-                    "token key generation failed within retry count 5"));
-            throw e;
-        }
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testStore_token_isNull() throws Exception {
-        try {
-            store = new HttpSessionTransactionTokenStore(5);
-            store.store(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("token must not be null"));
-            throw e;
-        }
+    @Test
+    void testStore_token_isNull() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                store = new HttpSessionTransactionTokenStore(5);
+                store.store(null);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("token must not be null"));
+                throw e;
+            }
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor_generator_isNull() throws Exception {
-        try {
-            new HttpSessionTransactionTokenStore(null, 10, 10);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("generator must not be null"));
-            throw e;
-        }
+    @Test
+    void testConstructor_generator_isNull() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new HttpSessionTransactionTokenStore(null, 10, 10);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("generator must not be null"));
+                throw e;
+            }
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor_transactionTokensPerTokenName_isZero() throws Exception {
-        try {
-            new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 0, 1);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is(
-                    "transactionTokenSizePerTokenName must be greater than 0"));
-            throw e;
-        }
+    @Test
+    void testConstructor_transactionTokensPerTokenName_isZero() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 0, 1);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is(
+                        "transactionTokenSizePerTokenName must be greater than 0"));
+                throw e;
+            }
+
+        });
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor_transactionTokensPerTokenName_isNegative() throws Exception {
-        try {
-            new HttpSessionTransactionTokenStore(new TokenStringGenerator(), -1, 0);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is(
-                    "transactionTokenSizePerTokenName must be greater than 0"));
-            throw e;
-        }
+    @Test
+    void testConstructor_transactionTokensPerTokenName_isNegative() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new HttpSessionTransactionTokenStore(new TokenStringGenerator(), -1, 0);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is(
+                        "transactionTokenSizePerTokenName must be greater than 0"));
+                throw e;
+            }
+
+        });
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor_retryCreateTokenName_isZero() throws Exception {
-        try {
-            new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 1, 0);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is(
-                    "retryCreateTokenName must be greater than 0"));
-            throw e;
-        }
+    @Test
+    void testConstructor_retryCreateTokenName_isZero() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 1, 0);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is(
+                        "retryCreateTokenName must be greater than 0"));
+                throw e;
+            }
+
+        });
 
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testConstructor_retryCreateTokenName_isNegative() throws Exception {
-        try {
-            new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 1, -1);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is(
-                    "retryCreateTokenName must be greater than 0"));
-            throw e;
-        }
+    @Test
+    void testConstructor_retryCreateTokenName_isNegative() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new HttpSessionTransactionTokenStore(new TokenStringGenerator(), 1, -1);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is(
+                        "retryCreateTokenName must be greater than 0"));
+                throw e;
+            }
+
+        });
 
     }
 }

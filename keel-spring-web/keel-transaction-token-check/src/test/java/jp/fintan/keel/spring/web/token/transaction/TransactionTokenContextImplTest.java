@@ -24,28 +24,18 @@
 package jp.fintan.keel.spring.web.token.transaction;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.*;
 
 import java.lang.reflect.Field;
 
 import org.springframework.util.ReflectionUtils;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TransactionTokenContextImplTest {
-
-    @Before
-    public void setUp() throws Exception {
-    }
-
-    @After
-    public void tearDown() throws Exception {
-    }
+class TransactionTokenContextImplTest {
 
     @Test
-    public void TestTransactionTokenContextImpl01() {
+    void TestTransactionTokenContextImpl01() {
 
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
@@ -66,7 +56,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestTransactionTokenContextImpl02() {
+    void TestTransactionTokenContextImpl02() {
 
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
@@ -87,7 +77,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestTransactionTokenContextImpl03() {
+    void TestTransactionTokenContextImpl03() {
 
         // setup parameters
         TransactionTokenInfo inTransactionToken = new TransactionTokenInfo("testTokenAttribute2", TransactionTokenType.IN);
@@ -108,7 +98,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestTransactionTokenContextImpl04() {
+    void TestTransactionTokenContextImpl04() {
 
         // setup parameters
         TransactionTokenInfo inTransactionToken = new TransactionTokenInfo("testTokenAttribute2", TransactionTokenType.IN);
@@ -129,7 +119,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestTransactionTokenContextImpl05() {
+    void TestTransactionTokenContextImpl05() {
 
         // setup parameters
         TransactionTokenInfo endTransactionToken = new TransactionTokenInfo("testTokenAttribute3", TransactionTokenType.END);
@@ -149,7 +139,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestTransactionTokenContextImpl06() {
+    void TestTransactionTokenContextImpl06() {
 
         // setup parameters
         TransactionTokenInfo endTransactionToken = new TransactionTokenInfo("testTokenAttribute3", TransactionTokenType.END);
@@ -169,7 +159,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void testTransactionTokenContextImpl07() {
+    void testTransactionTokenContextImpl07() {
 
         // setup parameters
         TransactionTokenInfo checkTransactionToken = new TransactionTokenInfo("checkToken", TransactionTokenType.CHECK);
@@ -189,7 +179,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void testTransactionTokenContextImpl08() {
+    void testTransactionTokenContextImpl08() {
 
         // setup parameters
         TransactionTokenInfo updateTransactionToken = new TransactionTokenInfo("updateToken", TransactionTokenType.CHECK);
@@ -209,7 +199,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCreateToken01() {
+    void TestCreateToken01() {
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
         TransactionToken receivedToken = new TransactionToken("aaa", "key", "value");
@@ -230,7 +220,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCreateToken02() {
+    void TestCreateToken02() {
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
         TransactionToken receivedToken = new TransactionToken("aaa");
@@ -250,7 +240,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestRemoveToken01() {
+    void TestRemoveToken01() {
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
         TransactionToken receivedToken = new TransactionToken("aaa", "key", "value");
@@ -271,7 +261,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation01() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation01() throws IllegalArgumentException, IllegalAccessException {
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
         TransactionToken receivedToken = new TransactionToken("aaa");
@@ -295,7 +285,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation02() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation02() throws IllegalArgumentException, IllegalAccessException {
 
         // setup parameters
         TransactionTokenInfo beginTransactionToken = new TransactionTokenInfo("testTokenAttribute1", TransactionTokenType.BEGIN);
@@ -318,7 +308,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation03() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation03() throws IllegalArgumentException, IllegalAccessException {
 
         // setup parameters
         TransactionTokenInfo inTransactionToken = new TransactionTokenInfo("testTokenAttribute2", TransactionTokenType.IN);
@@ -341,7 +331,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation04() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation04() throws IllegalArgumentException, IllegalAccessException {
 
         // setup parameters
         TransactionTokenInfo inTransactionToken = new TransactionTokenInfo("testTokenAttribute2", TransactionTokenType.IN);
@@ -364,7 +354,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation05() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation05() throws IllegalArgumentException, IllegalAccessException {
 
         // setup parameters
         TransactionTokenInfo endTransactionToken = new TransactionTokenInfo("testTokenAttribute3", TransactionTokenType.END);
@@ -387,7 +377,7 @@ public class TransactionTokenContextImplTest {
     }
 
     @Test
-    public void TestCancelReservation06() throws IllegalArgumentException, IllegalAccessException {
+    void TestCancelReservation06() throws IllegalArgumentException, IllegalAccessException {
 
         // setup parameters
         TransactionTokenInfo endTransactionToken = new TransactionTokenInfo("testTokenAttribute3", TransactionTokenType.END);

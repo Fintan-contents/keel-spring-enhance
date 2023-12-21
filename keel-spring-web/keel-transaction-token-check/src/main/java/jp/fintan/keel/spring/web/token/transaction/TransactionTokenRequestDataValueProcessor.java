@@ -26,7 +26,7 @@ package jp.fintan.keel.spring.web.token.transaction;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import jp.fintan.keel.spring.web.mvc.support.RequestDataValueProcessorAdaptor;
 
@@ -40,7 +40,7 @@ public class TransactionTokenRequestDataValueProcessor extends
     /**
      * Returns a map containing the {@link TransactionToken} received in the request. <br>
      * Request attribute containing the token string is {@link TransactionTokenInterceptor#NEXT_TOKEN_REQUEST_ATTRIBUTE_NAME}
-     * @see RequestDataValueProcessorAdaptor#getExtraHiddenFields(javax.servlet.http.HttpServletRequest)
+     * @see RequestDataValueProcessorAdaptor#getExtraHiddenFields(jakarta.servlet.http.HttpServletRequest)
      */
     @Override
     public Map<String, String> getExtraHiddenFields(

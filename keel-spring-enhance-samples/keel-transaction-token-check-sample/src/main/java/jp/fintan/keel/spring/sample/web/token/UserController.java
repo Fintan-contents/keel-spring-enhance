@@ -1,6 +1,6 @@
 package jp.fintan.keel.spring.sample.web.token;
 
-import javax.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotEmpty;
 
 import jp.fintan.keel.spring.web.token.transaction.InvalidTransactionTokenException;
 import jp.fintan.keel.spring.web.token.transaction.TransactionTokenCheck;

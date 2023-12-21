@@ -4,41 +4,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.util.Lists;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TransactionTokenPropertiesTest {
+class TransactionTokenPropertiesTest {
 
     private final TransactionTokenProperties properties = new TransactionTokenProperties();
 
     @Test
-    public void defaultEnabled() {
+    void defaultEnabled() {
         assertThat(properties.isEnabled()).isTrue();
     }
 
     @Test
-    public void customEnabled() {
+    void customEnabled() {
         properties.setEnabled(false);
         assertThat(properties.isEnabled()).isFalse();
     }
 
     @Test
-    public void defaultPathPatterns() {
+    void defaultPathPatterns() {
         assertThat(properties.getPathPatterns()).isEmpty();
     }
 
     @Test
-    public void customPathPatterns() {
+    void customPathPatterns() {
         properties.setPathPatterns(Lists.newArrayList("/user/**", "/item/**"));
         assertThat(properties.getPathPatterns()).containsExactly("/user/**", "/item/**");
     }
 
     @Test
-    public void defaultExcludePathPatterns() {
+    void defaultExcludePathPatterns() {
         assertThat(properties.getExcludePathPatterns()).isEmpty();
     }
 
     @Test
-    public void customExcludePathPatterns() {
+    void customExcludePathPatterns() {
         properties.setExcludePathPatterns(Lists.newArrayList("/admin/**", "/secure/**"));
         assertThat(properties.getExcludePathPatterns()).containsExactly("/admin/**", "/secure/**");
     }

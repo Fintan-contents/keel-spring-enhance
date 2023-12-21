@@ -24,42 +24,46 @@
 package jp.fintan.keel.spring.web.token;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.fail;
+import static org.hamcrest.MatcherAssert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.security.NoSuchAlgorithmException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-public class TokenStringGeneratorTest {
+class TokenStringGeneratorTest {
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testInvalidTokenGeneratorAlgorithm() throws Exception {
-        try {
-            new TokenStringGenerator("InvalidAlgorithm");
-        } catch (Exception e) {
-            assertThat(e.getCause(), is(instanceOf(
-                    NoSuchAlgorithmException.class)));
-            assertThat(e.getMessage(), is(
-                    "The given algorithm is invalid. algorithm=InvalidAlgorithm"));
-            throw e;
-        }
-        fail();
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void testNullTokenGeneratorAlgorithm() throws Exception {
-        try {
-            new TokenStringGenerator(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("algorithm must not be null"));
-            throw e;
-        }
-        fail();
+    @Test
+    void testInvalidTokenGeneratorAlgorithm() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new TokenStringGenerator("InvalidAlgorithm");
+            } catch (Exception e) {
+                assertThat(e.getCause(), is(instanceOf(
+                        NoSuchAlgorithmException.class)));
+                assertThat(e.getMessage(), is(
+                        "The given algorithm is invalid. algorithm=InvalidAlgorithm"));
+                throw e;
+            }
+            fail();
+        });
     }
 
     @Test
-    public void testGenerate_defaultMD5() {
+    void testNullTokenGeneratorAlgorithm() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            try {
+                new TokenStringGenerator(null);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("algorithm must not be null"));
+                throw e;
+            }
+            fail();
+        });
+    }
+
+    @Test
+    void testGenerate_defaultMD5() {
         TokenStringGenerator generator = new TokenStringGenerator();
         String value = generator.generate("hoge");
         assertThat(value, is(notNullValue()));
@@ -67,7 +71,7 @@ public class TokenStringGeneratorTest {
     }
 
     @Test
-    public void testGenerate_defaultMD5_empty() {
+    void testGenerate_defaultMD5_empty() {
         TokenStringGenerator generator = new TokenStringGenerator();
         String value = generator.generate("");
         assertThat(value, is(notNullValue()));
@@ -75,22 +79,24 @@ public class TokenStringGeneratorTest {
     }
 
     @Test
-    public void testGenerate_SHA256() {
+    void testGenerate_SHA256() {
         TokenStringGenerator generator = new TokenStringGenerator("SHA-256");
         String value = generator.generate("hoge");
         assertThat(value, is(notNullValue()));
         assertThat(value.length(), is(64));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGenerate_nullValue() throws Exception {
-        TokenStringGenerator generator = new TokenStringGenerator();
-        try {
-            generator.generate(null);
-        } catch (Exception e) {
-            assertThat(e.getMessage(), is("seed must not be null"));
-            throw e;
-        }
+    @Test
+    void testGenerate_nullValue() throws Exception {
+        assertThrows(IllegalArgumentException.class, () -> {
+            TokenStringGenerator generator = new TokenStringGenerator();
+            try {
+                generator.generate(null);
+            } catch (Exception e) {
+                assertThat(e.getMessage(), is("seed must not be null"));
+                throw e;
+            }
+        });
     }
 
 }
